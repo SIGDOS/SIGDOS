@@ -1,0 +1,256 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  background: #f7f7f7 url("../image/background.jpg");
+  background-repeat: unset;
+ 
+
+}
+
+.contenedor {
+  width: 100%;
+
+}
+
+header {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  padding: 1rem 1rem;
+
+}
+
+section table tr td input,select {
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  display: block;
+  border-radius: 5px;
+  box-shadow: 0 0.2rem 0.4rem rgba(40, 41, 43, 0.664);
+  border: 1px #ccc;
+}
+
+header h1 {
+  font-size: 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+aside {
+  float: left;
+  color: white;
+  overflow: hidden;
+  margin-left: -0.3%;
+  width: 9%;
+}
+
+aside ul #ind {
+  background-color: red;
+  width: 100%;
+  display: flex;
+  list-style: none;
+  margin: 2px;
+
+}
+
+aside ul #ind a {
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  transition: 0.5s ease;
+}
+
+aside ul:hover #ind a {
+  color: #ffffff;
+}
+
+aside ul :hover #ind a:not(:hover) {
+  color: white;
+  opacity: 0.3;
+  filter: blur(1px);
+}
+
+aside ul #inve {
+  background-color: red;
+  width: 100%;
+  display: flex;
+  list-style: none;
+  margin: 2px;
+}
+
+aside ul #inve a {
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  transition: 0.5s ease;
+}
+
+aside ul:hover #inve a {
+  color: #ffffff;
+}
+
+aside ul :hover #inve a:not(:hover) {
+  color: white;
+  opacity: 0.3;
+  filter: blur(1px);
+}
+
+.ok {
+  text-align: center;
+  width: 100%;
+  padding: 12px;
+  background: #44d5ee;
+  color: #fff;
+}
+
+.bad {
+  text-align: center;
+  width: 100%;
+  padding: 12px;
+  background: #a22;
+  color: #fff;
+}
+
+.contenido {
+
+  width: 55%;
+  margin: auto;
+}
+
+section {
+
+  transition: all 0.3s ease;
+  background-color: #ffffff88;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(25px);
+  margin: auto;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0;
+
+}
+
+section:hover {
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.3);
+}
+
+section table tr td {
+  padding: 3px;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+.data_delete{
+  text-align: center;
+
+}
+.data_delete h2{
+  font-size:12pt ;
+
+}
+.data_delete span{
+  font-weight: bold;
+  color: #4f72d4;
+  font-size: 12pt;
+}
+.data_delete form{
+  background: initial;
+  margin: auto;
+  padding: 5px 10px;
+  border:0;
+}
+.notItemOne option:first-child{
+  display: none;
+}
+section h2,
+section #Busquedad,
+section table {
+  margin-top: 0rem;
+  margin-left: 3rem;
+  margin-bottom: 1rem;
+  margin-right: 3rem;
+}
+
+
+section button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #ffffff;
+  background: linear-gradient(rgba(0, 0, 0, 0.87), rgba(255, 0, 0, 0.69));
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 4px;
+  cursor:pointer;
+
+}
+
+section button:hover {
+  background: rgba(212, 10, 10, 0.77);
+  color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #dc0f46,
+  0 0 25px #e30f48,
+  0 0 50px #ff0062,
+  0 0 100px #d51e4f;
+}
+footer {
+  background-color: #222;
+  padding: 1rem;
+  color: #fff;
+  margin-top: 16.5rem;
+}
+
+footer section {
+  margin: 0px;
+  float: right;
+  background-color: #222;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer a {
+  transition: color 0.3s ease;
+  color: #fff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: cornflowerblue;
+}
+
+@media screen and (max-width: 800px) {
+  .contenido {
+    width: 100%;
+  }
+
+  aside {
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .contenedor {
+    width: 100%;
+  }
+}
