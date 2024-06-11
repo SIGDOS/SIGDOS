@@ -50,7 +50,7 @@
                             <tbody id="content">
                                 <tr>
                                     <td><?php echo $data['id']; ?></td>
-                                    <td><?php echo $data['name'];echo " ".$data['lastname']; ?></td>
+                                    <td><?php echo $data['name']." ".$data['lastname']; ?></td>
                                     <td><?php echo $data['username']; ?></td>
                                     <td><?php echo $data['email']; ?></td>
                                     <td><?php echo $data['rol']; ?></td>
