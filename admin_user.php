@@ -19,8 +19,7 @@
                 <table>
                     <thead>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
+                        <th>Nombre y Apellido</th>
                         <th>Usuario</th>
                         <th>Correo</th>
                         <th>ROL</th>
@@ -51,9 +50,8 @@
                             <tbody id="content">
                                 <tr>
                                     <td><?php echo $data['id']; ?></td>
+                                    <td><?php echo $data['name'];echo " ".$data['lastname']; ?></td>
                                     <td><?php echo $data['username']; ?></td>
-                                    <td><?php echo $data['name']; ?></td>
-                                    <td><?php echo $data['lastname']; ?></td>
                                     <td><?php echo $data['email']; ?></td>
                                     <td><?php echo $data['rol']; ?></td>
                                     <td><a href="edit_usuario.php?id=<?php echo $data['id']; ?> ">Editar</a></td>
@@ -99,4 +97,8 @@
             <p>Copyright 2023</p>
         </footer>
     </body>
+    </html>
+
+    </body>
+
     </html>
