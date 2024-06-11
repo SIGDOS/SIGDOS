@@ -13,8 +13,8 @@
     <form action="autenticacion.php" method="POST">
       
       <div class="user-box">
-        <input type="text" name="username" required>
-        <label>Nombre de Usuario</label>
+        <input type="text" name="email" required>
+        <label>Correo Electrónico</label>
       </div>
       <div class="user-box">
         <input type="password" name="password" value="" required>
