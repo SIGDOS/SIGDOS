@@ -22,6 +22,14 @@ CREATE TABLE `cargo` (
   `cargo` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `cargo`
+--
+
+INSERT INTO `cargo` (`id`, `cargo`) VALUES
+(5, 'administrador'),
+(6, 'informatico');
+
 -- --------------------------------------------------------
 
 --
@@ -34,6 +42,13 @@ CREATE TABLE `departamento` (
   `ala` varchar(25) NOT NULL,
   `nombre_dpt` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `departamento`
+--
+
+INSERT INTO `departamento` (`id`, `codigo`, `ala`, `nombre_dpt`) VALUES
+(1, '0078', 'sur', 'Informatica');
 
 -- --------------------------------------------------------
 
@@ -64,12 +79,15 @@ CREATE TABLE `equipo_departamento` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `hospital_loc`
+-- Estructura de tabla para la tabla `localidad`
 --
 
-CREATE TABLE `hospital_loc` (
+CREATE TABLE `localidad` (
   `id` int(5) NOT NULL,
-  `nombre_hosp` varchar(45) NOT NULL
+  `nombre_hosp` varchar(45) NOT NULL,
+  `estado` varchar(20) NOT NULL,
+  `region` varchar(25) NOT NULL,
+  `tipo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -121,6 +139,15 @@ CREATE TABLE `roles` (
   `rol` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `rol`) VALUES
+(1, 'Root'),
+(2, 'Tecnico'),
+(3, 'General');
+
 -- --------------------------------------------------------
 
 --
@@ -164,6 +191,7 @@ CREATE TABLE `user` (
   `id` int(4) NOT NULL,
   `name` varchar(15) NOT NULL,
   `lastname` varchar(15) NOT NULL,
+  `username` varchar(30) NOT NULL,
   `email` varchar(40) NOT NULL,
   `password` varchar(15) NOT NULL,
   `date` varchar(10) NOT NULL,
@@ -171,9 +199,15 @@ CREATE TABLE `user` (
   `id_rol` int(2) NOT NULL,
   `id_cargo` int(2) NOT NULL,
   `departamento` int(4) NOT NULL,
-  `pregunta_segura` varchar(30) NOT NULL,
   `id_hospital_loc` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `lastname`, `username`, `email`, `password`, `date`, `tlf`, `id_rol`, `id_cargo`, `departamento`, `id_hospital_loc`) VALUES
+(9, 'sad', 'sad', 'ads', 'sadsdsad@sds.com', '12345678', '2000-10-10', 84840, 2, 5, 1, 4404);
 
 --
 -- Índices para tablas volcadas
@@ -210,9 +244,9 @@ ALTER TABLE `equipo_departamento`
   ADD UNIQUE KEY `id_loc_hospital` (`id_loc_hospital`);
 
 --
--- Indices de la tabla `hospital_loc`
+-- Indices de la tabla `localidad`
 --
-ALTER TABLE `hospital_loc`
+ALTER TABLE `localidad`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -274,13 +308,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
@@ -328,17 +362,11 @@ ALTER TABLE `tipo_equipos`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `cargo`
---
-ALTER TABLE `cargo`
-  ADD CONSTRAINT `cargo_ibfk_1` FOREIGN KEY (`id`) REFERENCES `user` (`id_cargo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `equipo`
@@ -353,7 +381,7 @@ ALTER TABLE `equipo_departamento`
   ADD CONSTRAINT `equipo_departamento_ibfk_1` FOREIGN KEY (`id_equipo`) REFERENCES `equipo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `equipo_departamento_ibfk_2` FOREIGN KEY (`id_tip_equipo`) REFERENCES `equipo` (`id_equipo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `equipo_departamento_ibfk_3` FOREIGN KEY (`id_dpto`) REFERENCES `departamento` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `equipo_departamento_ibfk_4` FOREIGN KEY (`id_loc_hospital`) REFERENCES `hospital_loc` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `equipo_departamento_ibfk_4` FOREIGN KEY (`id_loc_hospital`) REFERENCES `localidad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `orden`
@@ -371,6 +399,9 @@ ALTER TABLE `orden`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`id_hospital_loc`) REFERENCES `hospital_loc` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`id_cargo`) REFERENCES `cargo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
