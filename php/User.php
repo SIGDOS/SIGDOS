@@ -22,7 +22,7 @@ if (isset($_POST['Guardar'])) {
 
         <?php
         }
-        $consulta = "INSERT INTO `user`(`name`, `lastname`, `username`, `email`, `password`, `date`, `tlf`, `id_rol`, `id_cargo`, `departamento`, `id_hospital_loc`) VALUES ('$name','$lastname','$user','$email','$pass','$date','$tlf','$tipo','$post','$department','$hospital')";
+        $consulta = "INSERT INTO `user`(`name`, `lastname`, `username`, `email`, `password`, `date`, `tlf`, `id_rol`, `id_cargo`, `id_departamento`, `id_hospital_loc`) VALUES ('$name','$lastname','$user','$email','$pass','$date','$tlf','$tipo','$post','$department','$hospital')";
         $resultado = mysqli_query($mysqli, $consulta);
         
         if ($resultado) {
