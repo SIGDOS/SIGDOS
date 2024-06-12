@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-06-2024 a las 20:53:32
+-- Tiempo de generación: 13-06-2024 a las 00:58:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -218,23 +218,23 @@ CREATE TABLE `user` (
   `lastname` varchar(15) NOT NULL,
   `username` varchar(30) NOT NULL,
   `email` varchar(40) NOT NULL,
-  `password` varchar(15) NOT NULL,
+  `password` varchar(25) NOT NULL,
   `date` varchar(10) NOT NULL,
   `tlf` int(12) NOT NULL,
   `id_rol` int(2) NOT NULL,
   `id_cargo` int(2) NOT NULL,
   `id_departamento` int(4) NOT NULL,
-  `id_hospital_loc` int(5) NOT NULL
+  `id_hospital_loc` int(5) NOT NULL,
+  `estatu` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `lastname`, `username`, `email`, `password`, `date`, `tlf`, `id_rol`, `id_cargo`, `id_departamento`, `id_hospital_loc`) VALUES
-(1, 'admin', 'admin', 'admin', 'sadsdsad@sds.com', '$2y$10$bwMHvSvw', '2000-10-10', 84840, 1, 1, 1, 4404),
-(2, 'asdsa', 'asdsad', 'asdsad', 'sadsdsad@sds.com', '12345678', '0322-03-21', 213213, 3, 2, 1, 0),
-(6, 'enzo', 'colmenarez', 'Blacke2f', 'asdsda@gmil.comm', '$2y$10$KZaEA5dh', '2000-10-10', 2147483647, 3, 2, 1, 0);
+INSERT INTO `user` (`id`, `name`, `lastname`, `username`, `email`, `password`, `date`, `tlf`, `id_rol`, `id_cargo`, `id_departamento`, `id_hospital_loc`, `estatu`) VALUES
+(1, 'admin', 'admin', 'admin', 'sadsdsad@sds.com', '$2y$10$bwMHvSvw', '2000-10-10', 84840, 1, 1, 1, 4404, 1),
+(2, 'enzo', 'colmenarez', 'Blacke2f', 'asdsda@gmil.comm', '$2y$10$KZaEA5dh', '2000-10-10', 2147483647, 3, 2, 1, 0, 1);
 
 --
 -- Índices para tablas volcadas
@@ -390,7 +390,7 @@ ALTER TABLE `tipo_equipos`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
