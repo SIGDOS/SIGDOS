@@ -1,7 +1,5 @@
 <?php
 include("php/conexion1.php");
-
-
 if (isset($_POST['Actualizar'])) {
 
     if (!isset($_POST['fNombre']) || !isset($_POST['fCorreo']) || !isset($_POST['tipos'])) {
@@ -19,6 +17,7 @@ if (isset($_POST['Actualizar'])) {
         $post=trim($_POST['cargo']);
         $department=trim($_POST['departmento']);
         $pass = trim($_POST['fContrasena']);
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $email = trim($_POST['fCorreo']);
         $tipo = trim($_POST['tipos']);
  
@@ -38,7 +37,7 @@ if (isset($_POST['Actualizar'])) {
                 
 
             } else {
-                $sql_update = mysqli_query($mysqli, "UPDATE `user` SET `name`='$name',`lastname`='$lastname',`username`='$user',`email`='$email',`date`='$date',`tlf`='$tlf',`id_rol`='$tipo',`id_cargo`='$post',`id_departamento`='$department',`password`='$pass',`id_hospital_loc`='$hospital' WHERE='$id'");
+                $sql_update = mysqli_query($mysqli, "UPDATE `user` SET `name`='$name',`lastname`='$lastname',`username`='$user',`email`='$email',`date`='$date',`tlf`='$tlf',`id_rol`='$tipo',`id_cargo`='$post',`id_departamento`='$department',`password`='$hashed_password',`id_hospital_loc`='$hospital' WHERE='$id'");
                
 
             }
