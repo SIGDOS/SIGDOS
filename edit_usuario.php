@@ -26,7 +26,7 @@ if (isset($_POST['Actualizar'])) {
         $tlf = trim($_POST['tlf']);
         $hospital = trim($_POST['centroh']);
         $post = trim($_POST['cargo']);
-        $department = trim($_POST['departmento']);
+        $department = trim($_POST['departamento']);
         $pass = trim($_POST['fContrasena']);
         $email = trim($_POST['fCorreo']);
         $tipo = trim($_POST['tipos']);
@@ -43,55 +43,51 @@ if (isset($_POST['Actualizar'])) {
             // Actualizar usuario
             if (empty($_POST['fContrasena'])) {
                 $stmt = $mysqli->prepare("UPDATE user SET name =?, lastname =?, username =?, email =?, date =?, tlf =?, id_rol =?, id_cargo =?, id_departamento =?, id_hospital_loc =? WHERE id =?");
-                $stmt->bind_param("sssssssssi", $name, $lastname, $user, $email, $date, $tlf, $tipo, $post, $department, $hospital, $id);
+                $stmt->bind_param("ssssssssssi", $name, $lastname, $user, $email, $date, $tlf, $tipo, $post, $department, $hospital, $id);
             } else {
                 $hashed_password = hash_password($pass);
                 $stmt = $mysqli->prepare("UPDATE user SET name =?, lastname =?, username =?, email =?, date =?, tlf =?, id_rol =?, id_cargo =?, id_departamento =?, id_hospital_loc =?, password =? WHERE id =?");
-                $stmt->bind_param("ssssssssssi", $name, $lastname, $user, $email, $date, $tlf, $tipo, $post, $department, $hospital, $hashed_password, $id);
-            }
+                $stmt->bind_param("sssssssssssi", $name, $lastname, $user, $email, $date, $tlf, $tipo, $post, $department, $hospital, $hashed_password, $id);            }
             $stmt->execute();
 
-            if ($stmt->affected_rows > 0) {
-                echo "<h3 class='ok'>!Se han actualizado los Datos!";
+            if ($stmt) {
+                ?>
+                <h3 class="ok">!Se han a actualizado los datos!</h3>
+                <?php
 
-            }  else {
+            } else {
                 echo "<h3 class='bad'>!Error no se ha podido modificar!</h3>";
             }
         }
     }
-}
- else  if (isset($_POST['Cancelar'])) {
+}else  if (isset($_POST['Cancelar'])) {
     header('location: admin_user.php');
 }
-// Mostrar datos del usuario
+//Mostrar datos
 if (empty($_GET['id'])) {
     header('location: admin_user.php');
 }
 $iduser = $_GET['id'];
-$sql = mysqli_query($mysqli, "SELECT u.id, u.name, u.lastname,  u.username, u.email, u.date, 
-                                     u.tlf, u.id_cargo, u.id_departamento, u.id_hospital_loc, c.cargo, 
-                                    d.nombre_dpt,   (u.id_rol) as id_rol,   (r.rol) as rol FROM   user u 
-                                    INNER JOIN roles r ON u.id_rol = r.id 
-                                    INNER JOIN cargo c ON u.id_cargo = c.id 
-                                    JOIN departamento d ON u.id_departamento = d.id 
-                                      WHERE u.id =$iduser");
-$resul_sql = mysqli_num_rows($sql);
-if ($resul_sql == 0) {
+$stmt = $mysqli->prepare("SELECT u.id, u.name, u.lastname, u.username, u.email, u.date, u.tlf, u.id_cargo, u.id_departamento, u.id_hospital_loc,c.cargo, d.nombre_dpt, (u.id_rol) as id_rol, (r.rol) as rol FROM user u INNER JOIN roles r ON u.id_rol = r.id INNER JOIN cargo c ON u.id_cargo = c.id JOIN departamento d ON u.id_departamento = d.id WHERE u.id =$iduser");
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows == 0) {
     header('location: admin_user.php');
 } else {
     $option = '';
-    while ($data = mysqli_fetch_array($sql)) {
+    while ($data = $result->fetch_assoc()) {
         $iduser = $data['id'];
-        $name=$data['name'];
-        $lastname=$data['lastname'];
+        $name = $data['name'];
+        $lastname = $data['lastname'];
         $username = $data['username'];
-        $date=$data['date'];
-        $tlf=$data['tlf'];
-        $cargo=$data['id_cargo'];
-        $departament=$data['id_departamento'];
-        $departamento=$data['nombre_dpt'];
-        $carg=$data['cargo'];
-        $localidad=$data['id_hospital_loc'];
+        $date = $data['date'];
+        $tlf = $data['tlf'];
+        $cargo = $data['id_cargo'];
+        $departament = $data['id_departamento'];
+        $departamento = $data['nombre_dpt'];
+        $carg = $data['cargo'];
+        $localidad = $data['id_hospital_loc'];
         $email2 = $data['email'];
         $rol = $data['id_rol'];
         $roles = $data['rol'];
@@ -111,6 +107,8 @@ if ($resul_sql == 0) {
         } elseif ($rol == 2) {
             $option = '<option value="' . $rol . '"select>' . $roles . '</option>';
         }
+    
+
     }
 
 ?>
@@ -138,6 +136,7 @@ if ($resul_sql == 0) {
             <form method="post">
                 <table>
                     <tr>
+                    <td><input type="hidden" name="idusuario" value="<?php echo $iduser; ?>"></td>
                         <th><label for="">Información del usuario</label></th>
                     </tr>
                     <tr>
@@ -150,7 +149,7 @@ if ($resul_sql == 0) {
                     </tr>
                     <tr>
                         <td><label for="fNombre">Nombre de usuario:</label></td>
-                        <td><input type="text" id="fNombre" name="fNombre" value="<?php echo $username; ?>"></td>
+                        <td><input type="text" id="username" name="username" value="<?php echo $username; ?>"></td>
                     </tr>
                     <tr>
                         <td><label for="fecha">Fecha de nacimiento:</label></td>
@@ -172,7 +171,7 @@ if ($resul_sql == 0) {
                             $query_cargo = mysqli_query($mysqli, "SELECT * FROM cargo");
                             $result_cargo = mysqli_num_rows($query_cargo);
                             ?>
-                            <select name="n_personal" class="notItemOne">
+                            <select name="cargo" id="cargo" class="notItemOne">
                                 <?php
                                 echo $optionc;
                                 if ($result_cargo > 0) {
@@ -201,7 +200,7 @@ if ($resul_sql == 0) {
                             $query_dpt = mysqli_query($mysqli, "SELECT * FROM departamento");
                             $result_dpt = mysqli_num_rows($query_dpt);
                            ?>
-                            <select name="n_personal" class="notItemOne">
+                            <select name="departamento" id="departamento" class="notItemOne">
                                 <?php
                                 echo $optiond;
                                 if ($result_dpt > 0) {
@@ -242,8 +241,8 @@ if ($resul_sql == 0) {
                         </td>
                     </tr>
                 </table>
-                <button type="submit" name="Cancelar" value="">Cancelar</button>
-                <button type="submit" name="Actualizar" value="">Actualizar</button>
+                <BUTTON type="submit" name="Cancelar" value="">Cancelar</BUTTON>
+                <BUTTON type="submit" name="Actualizar" value="">actulaizar</BUTTON>
             </form>
         </section>
     </div>
