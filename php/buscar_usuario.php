@@ -34,10 +34,12 @@ include("../php/conexion1.php");
     <table>
         <thead>
         <th>ID</th>
+        <th>Nombre y Apellido</th>
         <th>Usuario</th>
         <th>Correo</th>
-        <th>ROL</th>
-        <th>Nombre y Apellido</th>
+         <th>ROL</th>
+        <th>Opciones</th>
+        <th><span></span></th>
         <th><span></span></th>
         </thead>
         <?php

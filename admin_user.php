@@ -24,6 +24,7 @@
                         <th>Usuario</th>
                         <th>Correo</th>
                         <th>ROL</th>
+                        <th>Opciones</th>
                         <th><span></span></th>
                     </thead>
                     <?php
