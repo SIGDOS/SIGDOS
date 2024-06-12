@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-06-2024 a las 19:20:16
+-- Tiempo de generación: 12-06-2024 a las 20:53:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -232,7 +232,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `lastname`, `username`, `email`, `password`, `date`, `tlf`, `id_rol`, `id_cargo`, `id_departamento`, `id_hospital_loc`) VALUES
-(1, 'sad', 'sad', 'ads', 'sadsdsad@sds.com', '12345678', '2000-10-10', 84840, 1, 1, 1, 4404);
+(1, 'admin', 'admin', 'admin', 'sadsdsad@sds.com', '$2y$10$bwMHvSvw', '2000-10-10', 84840, 1, 1, 1, 4404),
+(2, 'asdsa', 'asdsad', 'asdsad', 'sadsdsad@sds.com', '12345678', '0322-03-21', 213213, 3, 2, 1, 0),
+(6, 'enzo', 'colmenarez', 'Blacke2f', 'asdsda@gmil.comm', '$2y$10$KZaEA5dh', '2000-10-10', 2147483647, 3, 2, 1, 0);
 
 --
 -- Índices para tablas volcadas
@@ -321,9 +323,10 @@ ALTER TABLE `tipo_equipos`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `rol` (`id_rol`),
-  ADD UNIQUE KEY `cargo` (`id_cargo`),
-  ADD UNIQUE KEY `id_hospital_loc` (`id_hospital_loc`);
+  ADD KEY `tlf` (`tlf`),
+  ADD KEY `rol` (`id_rol`) USING BTREE,
+  ADD KEY `cargo` (`id_cargo`) USING BTREE,
+  ADD KEY `id_hospital_loc` (`id_hospital_loc`) USING BTREE;
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -387,7 +390,7 @@ ALTER TABLE `tipo_equipos`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
