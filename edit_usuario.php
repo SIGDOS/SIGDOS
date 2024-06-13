@@ -68,7 +68,8 @@ if (empty($_GET['id'])) {
     header('location: admin_user.php');
 }
 $iduser = $_GET['id'];
-$stmt = $mysqli->prepare("SELECT u.id, u.name, u.lastname, u.username, u.email, u.date, u.tlf, u.id_cargo, u.id_departamento, u.id_hospital_loc,c.cargo, d.nombre_dpt, (u.id_rol) as id_rol, (r.rol) as rol FROM user u INNER JOIN roles r ON u.id_rol = r.id INNER JOIN cargo c ON u.id_cargo = c.id JOIN departamento d ON u.id_departamento = d.id WHERE u.id =$iduser");
+$stmt = $mysqli->prepare("SELECT u.id, u.name, u.lastname, u.username, u.email, u.date, u.tlf, u.id_cargo, u.id_departamento, u.id_hospital_loc,c.cargo, d.nombre_dpt, (u.id_rol) as id_rol, (r.rol) as rol FROM user u 
+INNER JOIN roles r ON u.id_rol = r.id INNER JOIN cargo c ON u.id_cargo = c.id JOIN departamento d ON u.id_departamento = d.id WHERE u.id =$iduser");
 $stmt->execute();
 $result = $stmt->get_result();
 

@@ -1,0 +1,6 @@
+{
+    "name": "mi-proyecto/mi-paquete",
+    "description": "Una descripción de mi paquete",
+    "type": "project",
+    "require": {}
+}
