@@ -1,36 +1,31 @@
 <?php
-    session_start();
-    sleep(2);
-
-    // Variables para la BD
-    $servidor = "localhost";
-	$usuario = "root";
-	$contraseña = "";
-	$bd = "sigdos";
 	
-	$conexion = mysqli_connect($servidor, $usuario, $contraseña, $bd); // Variable de Conexion para la BD
+	session_start();
 
-	if (!$conexion){
-		die("Error al conectar con la base de datos: " . mysqli_connect_error());
-	}
+	include "conexion1.php";
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $username = $_POST['email'];
     $password = $_POST['password'];
 
-	$users = $conexion->query("SELECT name, email, id_rol FROM user WHERE email = '".$_POST['email']."' AND password = '".$_POST['password']."'");// Consulta la base de datos
+	$validar = $mysqli->query("SELECT * FROM user WHERE email = '".$_POST['email']."' AND password = '".$_POST['password']."'");// Consulta la base de datos
 	
 	// Verifica que exista un dato valido en la BD
-	if($users->num_rows == 1){
-		$data = $users->fetch_assoc();
-		$_SESSION['email']['id_rol'] = $data;
+	if(mysqli_num_rows($validar) > 0){
+		$_SESSION['username'] = $username;
+		header("Location: ../administrador.php");
+		exit;
 		// False error muestra el ID del rol
-		echo json_encode(array('error' => false, 'rol' => $data['id_rol'], 'usuario' => $data['name']));
+		//echo json_encode(array('error' => false, 'rol' => $data['id_rol'], 'name' => $data['name'], 'username' => $data['username']));
 	} else {
-		$error = json_encode(array('error' => true)); // Error true
-		echo "Usuario y contraseña invalidos";
+		//$error = json_encode(array('error' => true)); // Error true
+		echo '
+			<script>
+				alert("Usuario o contraseña invalidos");
+				window.location = "../login.php";
+			</script>
+		';
+		exit;
 		}
 	}
-
-	$conexion->close();
  ?>
