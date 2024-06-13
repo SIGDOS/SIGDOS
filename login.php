@@ -1,3 +1,17 @@
+<?php
+    
+    session_start();
+
+    if(isset($_SESSION['username'])){
+      header("Location: administrador.php");
+      exit;
+    }
+
+    session_destroy();
+
+?>
+
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -10,7 +24,7 @@
 <body>
   <div class="login-box">
     <h2>Iniciar Sesion</h2>
-    <form action="autenticacion.php" method="POST">
+    <form action="php/autenticacion.php" method="POST">
       
       <div class="user-box">
         <input type="text" name="email" required>
@@ -19,6 +33,12 @@
       <div class="user-box">
         <input type="password" name="password" value="" required>
        <label>Contraseña</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="form-checkbox" checked />
+        <label class="form-check-label" for="form-checkbox" style="color: #fff;">Recuerdame</label>
+
+        <a href="#!" style="color: #fff; float:right; text-decoration: none;">Contraseña Olvidada?</a>
       </div>
         <div class="user-box">
         </div>
